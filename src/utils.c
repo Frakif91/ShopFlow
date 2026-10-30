@@ -269,3 +269,43 @@ Adresse saisirAdresse(void) {
     return adresse;
 }
 
+
+#pragma region Test Unitaires
+// Tests unitaires simples, a appeler depuis un programme de test.
+// fait avec IA pour la rapidité.
+
+bool printSuccess = true;
+
+void test_anneeBissextile(void) {
+    assert(anneeBissextile(2000) == 1);
+    assert(anneeBissextile(2004) == 1);
+    assert(anneeBissextile(2100) == 0);
+    assert(anneeBissextile(2023) == 0);
+    if(printSuccess) printf("test_anneeBissextile passed\n");
+}
+
+void test_dateValide(void) {
+    Date date;
+    date.annee = 2024; date.mois = 2; date.jour = 29;
+    assert(dateValide(date) == 1);
+    date.annee = 2023;
+    assert(dateValide(date) == 0);
+    date.annee = 2024; date.mois = 4; date.jour = 31;
+    assert(dateValide(date) == 0);
+    date.mois = 13; date.jour = 1;
+    assert(dateValide(date) == 0);
+    date.mois = 1; date.annee = 1999;
+    assert(dateValide(date) == 0);
+    if(printSuccess) printf("test_dateValide passed\n");
+}
+
+void test_codePostalValide(void) {
+    assert(codePostalValide("75001") == 1);
+    assert(codePostalValide("00000") == 1);
+    assert(codePostalValide("7500") == 0);
+    assert(codePostalValide("750001") == 0);
+    assert(codePostalValide("75A01") == 0);
+    if(printSuccess) printf("test_codePostalValide passed\n");
+}
+
+#pragma endregion Fin Tests Unitaires
